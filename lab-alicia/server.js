@@ -2,7 +2,7 @@
 
 const express = require('express');
 const app = express();
-const paddleAPI = require('./api/paddleAPI.js')
+const paddleAPI = require('./routes/paddleAPI.js')
 
 const bodyParser = require('body-parser');
 
