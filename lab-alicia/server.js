@@ -2,16 +2,14 @@
 
 const express = require('express');
 const app = express();
+const paddleAPI = require('./api/paddleAPI.js')
 
 const bodyParser = require('body-parser');
-// const paddleAPI = require('./api/paddleapi.js');
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
+app.use('/api', paddleAPI);
 
-// app.use('/api/paddles', paddleAPI);
-
-let PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`listening on ${PORT}`);
 });
