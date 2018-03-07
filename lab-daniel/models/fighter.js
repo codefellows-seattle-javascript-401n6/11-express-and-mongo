@@ -1,13 +1,12 @@
 'use strict';
-
-const mongoose = require('mongoose');
 const uuid = require('uuid/v4');
+const mongoose = require('mongoose');
 
-//Mixed Martial Artists. Wins. Losses
-const Fighter = new mongoose.Schema({
-    name = String,
-    wins = Number,
-    losses = Number
-})
+let fighterSchema = mongoose.Schema({
+    name: String,
+    wins: Number,
+    losses: Number
+});
+let Fighter = mongoose.model('Fighter', fighterSchema);
 
-module.exports = { Fighter };
+module.exports = Fighter;
