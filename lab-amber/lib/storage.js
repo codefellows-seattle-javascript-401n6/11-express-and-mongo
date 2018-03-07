@@ -53,9 +53,9 @@ function remove(id) {
   });
 }
 
-function update(project) {
+function update(id, project) {
   return new Promise((resolve, reject) => {
-    Project.findOneAndUpdate(project.id, project, (err, project) => {
+    Project.findOneAndUpdate(id, project, (err, project) => {
       resolve(project);
     });
   });
