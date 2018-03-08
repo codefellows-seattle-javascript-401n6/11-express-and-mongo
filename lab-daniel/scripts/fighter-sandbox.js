@@ -23,6 +23,6 @@ Fighter.remove()
     })
     .then((results) => {
         console.log('FOUND:', results);
-        console.log('FOUND TOTAL', results.length);
+        console.log('FOUND TOTAL:', results.length);
         mongoose.disconnect();
     })
