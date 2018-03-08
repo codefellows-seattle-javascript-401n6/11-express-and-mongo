@@ -1,21 +1,20 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const Movie = require('../models/movie-model.js');
+const Movies = require('../models/movies.js');
 
 router.get('/', (req, res) => {
     if(req.query.id) {
-        Movie.findOne({_id: req.query.id})
+        Movies.findOne({_id: req.query.id})
         .then((results) => {
-            console.log('found:', results);
-            console.log('found total:', results.length);
+            console.log('FOUND:', results);
             res.send(results)
         });
     } else {
-        movie.find()
+        Movies.find()
         .then(results => {
-            console.log('found:', results);
-            console.log('found total:', results.length);
+            console.log('FOUND:', results);
+            console.log('FOUND TOTAL:', results.length);
             res.send(results);
         });
     }
