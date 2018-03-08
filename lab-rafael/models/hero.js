@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const heroSchema = new mongoose.Schema({
   name: String,
   superpower: String,
-  hero: Boolean
+  hero: String
 });
 
 const Hero = mongoose.model('Hero', heroSchema);
