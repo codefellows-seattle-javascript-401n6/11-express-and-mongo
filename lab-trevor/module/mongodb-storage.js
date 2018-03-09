@@ -18,6 +18,16 @@ function save(team){
     })
 }
 
+function remove(id) {
+    console.log('delete beginning')
+    return new Promise((resolve, reject) => {
+        Team.remove({_id: id}, (err, team) => {
+            resolve(team);
+            console.log('delete complete')
+        })
+    })
+}
+
 function removeAll(){
     return new Promise ((resolve, reject) => {
         Team.remove((err, teams) => {
@@ -25,18 +35,4 @@ function removeAll(){
         })
     })
 }
-module.exports = {save, Team, removeAll}
-
-
-
-// return Beer.find({rating: 10});
-
-// bears.save()
-// .then((savedTeam) => {
-//     console.log('saved', savedTeam);
-// })
-// .then((savedTeam) =>{
-//     return vikings.save();
-//     mongoose.disconnect();
-// });
-//or
+module.exports = {save, Team, removeAll, remove}

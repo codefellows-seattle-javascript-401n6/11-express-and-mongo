@@ -9,7 +9,6 @@ router.get('/', (req,res) => {
     if(req.query.id){
         mongodb.Team.findOne({_id:req.query.id})
         .then((results) => {
-            console.log('yahoo', results)
             res.send(results)
         })
     } else {
@@ -21,9 +20,18 @@ router.get('/', (req,res) => {
     }
 });
 
-router.get('/:city', (req,res) => {
-    console.log('express url params', req.params.city);
-    res.send(req.params);
-});
+router.delete('/delete', (req, res) =>{
+    let id = req.query.id;
+    console.log(id)
+    console.log('mongodb', mongodb.Team.remove)
+    mongodb.remove(id)
+
+    .then(reseult => {
+        res.send('delete complete');
+    }).catch(err => {
+        res.send('uh oh')
+    })
+})
+
 
 module.exports = router;

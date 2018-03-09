@@ -11,14 +11,14 @@ const mongodb = require('./module/mongodb-storage')
 const rootRoutes = require('./routes/root');
 const cityRoutes = require('./routes/city');
 
-app.use(bodyParser.json());
-
-app.use('/', rootRoutes);
-app.use('/city', cityRoutes);
-
 const PORT = process.env.PORT || 3000;
 
-storage.seed();
+app.use(bodyParser.json());
+storage.seed()
+
+app.use('/', rootRoutes);
+app.use('/API/city', cityRoutes);
+
 
 app.listen(PORT, () => {
     console.log('listening on port' + PORT);
