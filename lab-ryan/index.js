@@ -6,12 +6,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
 
-//check route requirements
-// const Movie = require('./routes/Movies');
+const routes = require('./routes/movies-routes.js');
 
-// app.use('/Movie', Movie);
+//middleware access to routes
+app.use('/api/movies', routes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const Movies = require('../models/movies.js');
+const Movie = require('../models/movies.js');
 
 mongoose.connect('mongodb://localhost/test')
 .then(() => {
@@ -13,23 +13,21 @@ mongoose.connect('mongodb://localhost/test')
     })
 )
 
-
-
-function save(Movies) {
-    let movieCollection = new Movie({
+function save(movie) {
+    let movieModel = new Movie({
         name: movie.name,
         date: movie.date,
         rating: movie.rating,
     })
-    return new Promise((res, rej)=> {
-        movieCollection.save((err, movieCollection)=> {
-            resolve(movieCollection);
+    return new Promise((resolve, reject)=> {
+        movieModel.save((err, savedMovie)=> {
+            resolve(savedMovie);
         })
     });
 }
 
 function get(id) {
-    return new Promise((res, rej)=> {
+    return new Promise((resolve, reject)=> {
         Movie.findOne({_id: id}, (err, movieCollection)=> {
             resolve(movieCollection);
         })
@@ -37,35 +35,28 @@ function get(id) {
 }
 
 function getAll() {
-    return new Promise((res, rej)=> {
+    return new Promise((resolve, reject)=> {
         Movie.find((err, movieCollection) =>{
             resolve(movieCollection);
         })
     });
 }
 
-function update(id, Movie) {
-    return new Promise((res, rej) => {
-      Movies.findOneAndUpdate(id, movieCollection, (err, movieCollection) => {
-        resolve(movieCollection);
+function update(id, movie) {
+    return new Promise((resolve, reject) => {
+      Movie.findOneAndUpdate(id, movie, (err, movie) => {
+        resolve(movie);
       });
     });
   }
 
 function remove(id) {
-    return new Promise((res, rej)=> {
-        Movies.remove({_id: id}, (err, movieCollection)=> {
-            resolve(movieCollection)
-        })
-    });
-}
-
-function removeAll() {
     return new Promise((resolve, reject)=> {
-        Movies.remove((err, movieCollection) => {
-            resolve(movieCollection);
+        Movie.remove({_id: id}, (err, movie)=> {
+            resolve(movie)
         })
     });
 }
 
-module.exports = {save, get, getAll, remove, removeAll,update};
+
+module.exports = {save, get, getAll, remove, update};
