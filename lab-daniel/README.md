@@ -1,3 +1,5 @@
-RECAP ON WHERE I LEFT OFF:
+LAB REVIEW NOTES:
+Code Organization
 
-I just created my fighter sandbox. My new fighters are logging on to the my terminal and MONGO is issuing them a specific ID. I now have to do CRUD.
+
+app.get

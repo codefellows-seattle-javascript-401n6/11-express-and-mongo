@@ -1,14 +1,16 @@
 'use strict';
+const mongodb = require('./mongo.js');
+const Fighter = require('../models/fighter.js');
 
-function fighterStorage (storage) {
+function seed(storage) {
     return storage.removeAll()
     .then(() => {
-        return Promise.all([
-            storage.save(new Fighter({ name: 'Conor McGregor', wins: 21, losses: 3 })),
-            storage.save(new Fighter({ name: 'Jon Jones', wins: 23, losses: 1 })),
-            storage.save(new Fighter({ name: 'CM Punk', wins: 0, losses: 1 }))
-        ])
-    })
-}
+      return Promise.all([
+        storage.save(new Fighter({name: "Conor McGregor", wins: 21, losses: 3})),
+        storage.save(new Fighter({name: "Jon Jones", wins: 24, losses: 0})),
+        storage.save(new Fighter({name: "CM Punks", wins: 0, losses: 1}))
+      ])
+    });
+  }
 
-module.exports = fighterStorage;
+  module.exports = {mongodb, seed};
