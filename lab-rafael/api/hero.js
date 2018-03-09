@@ -16,7 +16,10 @@ router.get('/', (req, res) => {
 
 router.route('/heroes')
   .post((req, res) => {
-
+    if (!req.body.name || !req.body.superpower || !req.body.hero) {
+      res.status(400);
+      res.send('Error, bad request body');
+    }
     let hero = new Hero();   
     hero.name = req.body.name;
     hero.superpower = req.body.superpower;
@@ -48,7 +51,9 @@ router.route('/heroes/:hero_id')
       if (err) {
         res.send(err);
       }
-
+      if (hero === null) {
+        res.status(404);
+      }      
       res.json(hero);
     });
   })
