@@ -5,6 +5,17 @@ mongoose.connect('mongodb://localhost/test');
 
 const Hero = require('../../models/hero');
 
+let getAll = () => {
+  return new Promise((resolve, reject) => {
+    Hero.find((err, heroes) => {
+      if (err) {
+        throw err;
+      }
+      resolve(heroes);
+    });
+  });
+};
+
 let save = (hero) => {
   let newHero = new Hero({
     name: hero.name,
@@ -44,4 +55,15 @@ let remove = (id) => {
   });
 };
 
-module.exports = { save, get, remove };
+let removeAll = () => {
+  return new Promise((resolve, reject) => {
+    Hero.remove((err, heroes) => {
+      if (err) {
+        throw err;
+      }
+      resolve(heroes);
+    });
+  });
+};
+
+module.exports = { save, get, remove, getAll, removeAll };
