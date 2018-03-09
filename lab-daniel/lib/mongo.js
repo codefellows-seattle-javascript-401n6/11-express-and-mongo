@@ -22,18 +22,27 @@ function get(id) {
     });
   }
 
-// //SAVE FIGHTER
-// function save(fighter){
-//     let fighterModel = new Fighter({
-//         name: fighter.name,
-//         wins: fighter.wins,
-//         losses: fighter.losses
-//     });
-//     return new Promise((res, rej) => {
-//         fighterModel.save((err, savedFighter) => {
-//             resolve(savedFighter);
-//         })
-//     });
-// }
+//SAVE FIGHTER
+function save(fighter){
+    let fighterModel = new Fighter({
+        name: fighter.name,
+        wins: fighter.wins,
+        losses: fighter.losses
+    });
+    return new Promise((resolve, reject) => {
+        fighterModel.save((err, savedFighter) => {
+            resolve(savedFighter);
+        })
+    });
+}
 
-module.exports = {get, getAll}
+//DELETE FIGHTER
+function remove(id){
+  return new Promise((resolve, reject) => {
+    Fighter.remove((err, fighter) => {
+      resolve(fighter)
+    })
+  });
+}
+
+module.exports = { get, getAll, save, remove };

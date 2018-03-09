@@ -13,4 +13,4 @@ function seed(storage) {
     });
   }
 
-  module.exports = {mongodb, seed};
+  module.exports = { mongodb, seed };
