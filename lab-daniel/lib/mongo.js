@@ -14,24 +14,24 @@ function get(id) {
   }
 
 //GET ALL FIGHTERS
-  function getAll() {
-    return new Promise((resolve, reject) => {
-      Fighter.find((err, fighter) => {
-        resolve(fighter);
+function getAll() {
+  return new Promise((resolve, reject) => {
+    Fighter.find((err, fighter) => {
+      resolve(fighter);
       })
     });
   }
 
 //SAVE FIGHTER
 function save(fighter){
-    let fighterModel = new Fighter({
-        name: fighter.name,
-        wins: fighter.wins,
-        losses: fighter.losses
-    });
+  let fighterModel = new Fighter({
+    name: fighter.name,
+    wins: fighter.wins,
+    losses: fighter.losses
+  });
     return new Promise((resolve, reject) => {
-        fighterModel.save((err, savedFighter) => {
-            resolve(savedFighter);
+      fighterModel.save((err, savedFighter) => {
+        resolve(savedFighter);
         })
     });
 }

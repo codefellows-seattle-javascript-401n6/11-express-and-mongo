@@ -1,6 +1,8 @@
 'use strict';
 const mongodb = require('./mongo.js');
 const Fighter = require('../models/fighter.js');
+const mongo = require('../lib/mongo.js');
+
 
 function seed(storage) {
     return storage.removeAll()

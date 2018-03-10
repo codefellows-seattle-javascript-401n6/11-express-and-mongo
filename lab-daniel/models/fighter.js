@@ -7,6 +7,6 @@ let fighterSchema = mongoose.Schema({
     wins: Number,
     losses: Number
 });
-let Fighter = mongoose.model('Fighter', fighterSchema);
+let Fighter = mongoose.model('fighter', fighterSchema);
 
 module.exports = Fighter;
