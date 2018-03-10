@@ -11,5 +11,5 @@
 * Call mongod in your terminal.
 * Run nodemon index.js to access localhost: 3000.
 * call localhost:3000/api/movies to see all movie objects
-* call localhost:3000/api/movies?id= to retrieve indicidual movie instances.
-* 
+* call localhost:3000/api/movies?id= to retrieve individual each movie.
+* If you are having difficulty calling all movies use Postman to check each GET, POST, PUT and DELETE call.
