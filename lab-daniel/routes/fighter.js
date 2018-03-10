@@ -60,7 +60,7 @@ router.put('/', (req, res) => {
 router.delete('/', (req, res) => {
     let id = req.query.id;
     storage.remove(id)
-    .then(fighter => {
+    .then((fighter) => {
         res.writeHead(204);
         res.send(fighter);
     })
