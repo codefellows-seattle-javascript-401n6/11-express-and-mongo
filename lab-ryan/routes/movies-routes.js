@@ -11,31 +11,36 @@ router.get('/', (req, res) => {
                 _id: req.query.id
             })
             .then((results) => {
-                console.log('FOUND:', results);
+                // console.log('FOUND:', results);
                 res.send(results)
             });
     } else {
         Movies.find()
             .then(results => {
-                console.log('FOUND:', results);
-                console.log('FOUND TOTAL:', results.length);
+                // console.log('FOUND:', results);
+                // console.log('FOUND TOTAL:', results.length);
+                res.status(400);
                 res.send(results);
             });
     }
 });
 
 router.post('/', (req, res) => {
-    let movies = {
-        name: req.body.name,
-        date: req.body.date,
-        rating: req.body.rating,
-    };
+    if (req.body.name === undefined || req.body.date === undefined) {
+        res.sendStatus(400);
+    } else {
+        let movie = {
+            name: req.body.name,
+            date: req.body.date,
+            rating: req.body.rating,
+        };
 
-    storage.save(movies)
-        .then(movies => {
-            res.status(200);
-            res.send(movies);
-        })
+        storage.save(movie)
+            .then(movie => {
+                res.status(200);
+                res.send(movie);
+            })
+    }
 });
 
 router.put('/', (req, res) => {
@@ -50,10 +55,10 @@ router.put('/', (req, res) => {
 router.delete('/', (req, res) => {
     let id = req.query.id;
     storage.remove(id)
-    .then(movie => {
-        res.status(204);
-        res.send(movie);
-    });
+        .then(movie => {
+            res.status(204);
+            res.send(movie);
+        });
 });
 
 
