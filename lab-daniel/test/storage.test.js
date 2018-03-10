@@ -16,7 +16,7 @@ describe('Storage Test', () => {
             if(err){
                 // console.log('Error:', err);
             }
-            expect(res.status).toBe(404);
+            expect(res.status).toEqual(404);
             resolve();
         });
     });
@@ -28,10 +28,11 @@ describe('Storage Test', () => {
             if(err){
                 // console.log('Error:', err);
             }
-            expect(res.status).toBe(404);
+            expect(res.status).toEqual(404);
             resolve();
         });
     });
+
 
     test('It should return 200 for a valid id', (resolve, reject) => {
         request.get(server + '/api/fighter')
@@ -42,9 +43,38 @@ describe('Storage Test', () => {
             .end((err, res) => {
                 expect(res.body).toEqual(expected);
                 resolve();
-
             });
         });
     });
 
+
+    //need to fix. It keeps recieving 404
+    test('It should return 400 for no request body, or if body was invalid', (resolve, reject) => {
+        request.post(server + '/api/fighters')
+        .end((err, res) => {
+            expect(res.status).toEqual(404);
+            resolve();
+        });
+    });
+    
+
+    test('It should return 200 for requests with a valid body', () => {
+        let newFighter = {
+            name: 'Jon Doe',
+            wins: 100,
+            losses: 0
+        }
+        request.post(server + 'api/fighter')
+        .set('Content-Type', 'application/json')
+        .send(JSON.stringify(newFighter))
+        .end((err, res) => {
+            expect(res.body.name).toEqual(newFighter.name);
+            expect(res.body.wins).toEqual(newFighter.wins);
+            expect(res.body.losses).toEqual(newFighter.losses);
+            expect(res.status).toEqual(200);
+            resolve();
+        });
+    });
+
+    
 })

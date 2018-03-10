@@ -5,7 +5,11 @@ const storage = require('../lib/mongo.js');
 
 //GET or GET ALL FIGHTER(S)
 router.get('/', (req, res) => {
-    if(req.query.id){
+    if(!req.query.id){
+        res.status(404);
+        res.send('not found');
+    }
+    else if(req.query.id){
         let id = req.query.id;
         storage.get(id)
         .then(fighter => {
@@ -21,6 +25,13 @@ router.get('/', (req, res) => {
 
 //SAVE FIGHTER
 router.post('/', (req, res) => {
+    if (req.body.name === undefined || 
+        req.body.wins === undefined || 
+        req.body.losses === undefined) {
+            res.status(400);
+            res.send('Bad Request!');
+      }
+    else{
     let fighter = {
       name: req.body.name,
       wins: req.body.wins,
@@ -28,9 +39,10 @@ router.post('/', (req, res) => {
     };
     storage.save(fighter)
     .then(figher => {
-      res.status(200);
-      res.send(fighter);
+    res.status(200);
+    res.send(fighter);
     });
+    }
   })
 
 
