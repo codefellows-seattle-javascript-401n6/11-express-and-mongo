@@ -1,12 +1,15 @@
 'use strict';
-const uuid = require('uuid/v4');
+
 const mongoose = require('mongoose');
 
-let movieSchema = new mongoose.Schema({
+const movieSchema = mongoose.Schema({
     name: String,
     date: Number,
-    rating: Number
+    rating: Number,
 });
-let Movies = mongoose.model('Movies', movieSchema);
 
-module.exports = Movies;
+let Movie = mongoose.model('Movie', movieSchema);
+
+module.exports = Movie;
+
+
