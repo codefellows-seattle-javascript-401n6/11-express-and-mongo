@@ -3,7 +3,9 @@
 var express = require('express')
 var router = express.Router()
 
-const storage = require('../lib/storage/storage').mongodb;
+const storage = require('../lib/storage/storage');
+
+storage.seed();
 
 router.get('/', (req, res) => {
   if (req.query.id) {
@@ -27,6 +29,7 @@ router.post('/', (req, res) => {
     length: req.body.length,
   };
 
+  // save paddle to database
   storage.save(paddle)
   .then(paddle => {
     res.status(200);
