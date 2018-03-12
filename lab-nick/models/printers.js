@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 // a schema defines the structure of a resource
 let printerSchema = mongoose.Schema({
   name: String,
-  style: Number,
-  volume: Number,
+  style: String,
+  volume: String,
   nozel: Number,
   filament: Number,
 });
