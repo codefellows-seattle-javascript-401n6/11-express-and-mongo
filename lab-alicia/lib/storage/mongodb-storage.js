@@ -3,7 +3,7 @@ mongoose.connect('mongodb://localhost/test');
 
 const Paddle = require('../../models/paddle');
 
-function save(paddle) {
+let save = (paddle) => {
   let paddleModel = new Paddle({
     name: paddle.name,
     bladeSurfaceArea: paddle.bladeSurfaceArea,
@@ -11,13 +11,13 @@ function save(paddle) {
   })
 
   return new Promise((resolve, reject) => {
-    bookModel.save((err, savedPaddle) => {
+    paddleModel.save((err, savedPaddle) => {
       resolve(savedPaddle);
     })
   });
 }
 
-function get(id) {
+let get = (id) => {
   return new Promise((resolve, reject) => {
     Paddle.findOne({_id: id}, (err, paddles) => {
       resolve(paddles);
@@ -25,7 +25,7 @@ function get(id) {
   });
 }
 
-function getAll() {
+let getAll = () => {
   return new Promise((resolve, reject) => {
     Paddle.find((err, paddles) => {
       resolve(paddles);
@@ -33,7 +33,7 @@ function getAll() {
   });
 }
 
-function remove(id) {
+let remove = (id) => {
   return new Promise((resolve, reject) => {
     Paddle.remove({_id: id}, (err, paddle) => {
       resolve(paddle);
@@ -41,7 +41,7 @@ function remove(id) {
   });
 }
 
-function removeAll() {
+let removeAll = () => {
   return new Promise((resolve, reject) => {
     Paddle.remove((err, paddles) => {
       resolve(paddles);

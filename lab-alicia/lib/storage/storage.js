@@ -1,10 +1,20 @@
 'use strict';
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+// mongoose.connect('mongodb://localhost/test');
 
 const Paddle = require('../../models/paddle.js');
 
-function seed() {
+mongoose.connect('mongodb://localhost/paddle').then(
+  () => {
+    console.info(`Mongoose connection successful`);
+  }
+).catch(
+  (error) => {
+    console.error(`Error on connection: ${error}`);
+  }
+);
+
+let seed = () => {
   return removeAll()
   .then(() => {
     return Promise.all([
@@ -15,12 +25,12 @@ function seed() {
   });
 };
 
-function save(paddle) {
+let save = (paddle) => {
   let paddleModel = new Paddle({
     name: paddle.name,
     bladeSurfaceArea: paddle.bladeSurfaceArea,
     length: paddle.length
-  })
+  });
   return new Promise((resolve, rej) => {
     paddleModel.save((err, savedPaddle) => {
       resolve(savedPaddle);
@@ -28,7 +38,7 @@ function save(paddle) {
   })
 };
 
-function get(id) {
+let get = (id) => {
   return new Promise((resolve, rej) => {
     Paddle.findOne({_id: id}, (err, paddles) => {
       resolve(paddles);
@@ -36,7 +46,7 @@ function get(id) {
   })
 };
 
-function getAll() {
+let getAll = () => {
   return new Promise((resolve, rej) => {
     Paddle.find((err, paddles) => {
       resolve(paddles);
@@ -44,7 +54,7 @@ function getAll() {
   });
 };
 
-function remove(id) {
+let remove = (id) => {
   return new Promise((resolve, rej) => {
     Paddle.remove({_id: id}, (err, paddle) => {
       resolve(paddle);
@@ -52,7 +62,7 @@ function remove(id) {
   });
 };
 
-function removeAll() {
+let removeAll = () => {
   return new Promise((resolve, rej) => {
     Paddle.remove((err, paddles) => {
       resolve(paddles);
