@@ -10,12 +10,23 @@ router.get('/', (req, res) => {
     let sen = senshiMongoose.getSenshi();
     res.json(sen); 
   });
-// router.get(`/:id`,(req,res)=>{
+  //not seeing it on the browser//
+
+router.get(`/:id`,(req,res)=>{
  
-//     res.send(senshi);
-//     console.log('get senshi',senshi)
-// });
+    res.send(senshi);
+    console.log('get senshi',senshi)
+});
 // router.post(`/`,(req,res)=>{
+//     const senshi = [new Senshi('Sailor Jupiter','  Makoto Kino',' Lightning Magic/Martial Arts',' Inner Senshi')]
+//     res.send(JSON.stringify(senshi));
+// });
+
+// router.put(`/`,(req,res)=>{
+//     const senshi = [new Senshi('Sailor Jupiter','  Makoto Kino',' Lightning Magic/Martial Arts',' Inner Senshi')]
+//     res.send(JSON.stringify(senshi));
+// });
+// router.delete(`/`,(req,res)=>{
 //     const senshi = [new Senshi('Sailor Jupiter','  Makoto Kino',' Lightning Magic/Martial Arts',' Inner Senshi')]
 //     res.send(JSON.stringify(senshi));
 // });

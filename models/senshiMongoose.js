@@ -39,6 +39,23 @@ let getSenshi = (results) => {
         })
 }
 
+let getOneSenshi = (results) => {
+    
+    Promise.all(saves)
+        .then((savedSenshi) => {
+            console.log('Saved', savedSenshi);
+            return Senshi.find(`${__id}`);
+        })
+        .then((results) => {
+            console.log('Found', results);
+            mongoose.disconnect();
+        })
+}
+
+let postSenshi = (results) => {
+    
+}
+
 let deleteSenshi = (results)=>{
    return Senshi.remove()
     .then((results) => {
