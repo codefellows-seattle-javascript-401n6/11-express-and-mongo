@@ -2,8 +2,8 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-const Senshi = require('./models/senshi.js');
 const senshiRouter = require('./routes/senshiRouter.js')
+const mongoose = require('mongoose');
 
 app.use('/api/senshi', senshiRouter);
 
