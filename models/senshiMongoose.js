@@ -16,52 +16,49 @@ let saves = [
     sailorMercury.save(),
 ]
 
-// Promise.all(saves)
-//     .then((savedSenshi) => {
-//         console.log('Saved', savedSenshi);
-//         return Senshi.find();
-//     })
-//     .then((results) => {
-//         console.log('Found', results);
-//         mongoose.disconnect();
-//     })
-
-let getSenshi = (results) => {
-    
-    Promise.all(saves)
-        .then((savedSenshi) => {
-            console.log('Saved', savedSenshi);
-            return Senshi.find();
-        })
-        .then((results) => {
-            console.log('Found', results);
-            mongoose.disconnect();
-        })
-}
-
-let getOneSenshi = (results) => {
-    
-    Promise.all(saves)
-        .then((savedSenshi) => {
-            console.log('Saved', savedSenshi);
-            return Senshi.find(`${__id}`);
-        })
-        .then((results) => {
-            console.log('Found', results);
-            mongoose.disconnect();
-        })
-}
-
-let postSenshi = (results) => {
-    
-}
-
-let deleteSenshi = (results)=>{
-   return Senshi.remove()
+let postSenshi = () =>{
+Promise.all(saves)
+    .then((savedSenshi) => {
+        console.log('Saved', savedSenshi);
+    })
     .then((results) => {
         console.log('Found', results);
         mongoose.disconnect();
     })
 }
+
+let getSenshi = (results) => {
+    return new Promise((resolve, reject) =>{
+    Senshi.find()
+     .then((results) => {
+            resolve(results);
+            console.log('Found', results);
+            mongoose.disconnect();
+        })
+    })
+}
+
+
+let getOneSenshi = (results, id) => {
+ // need to put the id in here       
+       Senshi.find(`${__id}`)
+        .then((results) => {
+            console.log('Found', results);
+            mongoose.disconnect();
+        })
+}
+
+let deleteSenshi = (results) => {
+    return new Promise((resolve, reject) =>{
+        return Senshi.remove()
+            .then((results) => {
+            resolve(results);
+            console.log('All Senshi Deleted', results);
+            mongoose.disconnect();
+        })
+    })
+}
+
+
 
 module.exports = {getSenshi};
