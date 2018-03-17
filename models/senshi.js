@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 const mongoose = require('mongoose');
-
-const senshiSchema = new mongoose.Schema({
-    name:'string',
-    power:'string',
-    position:'string'
+let senshiSchema = mongoose.Schema({
+    senshiName:String, 
+    name:String, 
+    power: String, 
+    rank:String,
 });
+const Senshi = mongoose.model('senshi', senshiSchema);
 
-const Senshi = mongoose.modle('Senshi',senshiSchema);
 module.exports = Senshi;
