@@ -1,11 +1,11 @@
 'use strict'
-class Senshi{
-    constructor(senshiName, name, power, rank){
-        this.senshiName = senshiName;
-        this.name = name;
-        this.power = power;
-        this.rank = rank;
-    }
-}
+const mongoose = require('mongoose');
+let senshiSchema = mongoose.Schema({
+    senshiName:String, 
+    name:String, 
+    power: String, 
+    rank:String,
+});
+const Senshi = mongoose.model('senshi', senshiSchema);
 
 module.exports = Senshi;
