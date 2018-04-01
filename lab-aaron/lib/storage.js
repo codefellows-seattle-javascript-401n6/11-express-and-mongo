@@ -3,15 +3,16 @@
 const Song = require('../model/song.js');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
-
+// console.log(Song);
 //SEED
-const seed = (storage) => {
-  return storage.removeAll()
+const seed = () => {
+  console.log('start', Song);
+  removeAll()
     .then(() => {
       return Promise.all([
-        storage.save(new Song({title: 'Wings of Piano', composer: 'V.K.', difficulty: 7})),
-        storage.save(new Song({title: 'Sunset', composer: 'Alex Vourtsanis', difficulty: 8})),
-        storage.save(new Song({title: 'Holy Knight', composer: 'Eyemedia', difficulty: 7}))
+        save(new Song({title: 'Wings of Piano', composer: 'V.K.', difficulty: 7})),
+        save(new Song({title: 'Sunset', composer: 'Alex Vourtsanis', difficulty: 8})),
+        save(new Song({title: 'Holy Knight', composer: 'Eyemedia', difficulty: 7}))
       ]);
     });
 };
@@ -50,7 +51,6 @@ const getAll = () => {
   });
 };
 
-// watch out! 'delete' is a keyword in JavaScript. Get creative.
 const remove = (id) => {
   return new Promise((resolve, reject) => {
     Song.remove({_id: id}, (error, song) => {
@@ -62,6 +62,9 @@ const remove = (id) => {
 const removeAll = () => {
   return new Promise((resolve, reject) => {
     Song.remove((error, songs) => {
+      if(error) {
+        console.error(error);
+      }
       resolve(songs);
     });
   });

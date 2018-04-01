@@ -3,8 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const Song = require('../model/song.js');
-const storage = require('../lib/storage.js').mongodb;
+const storage = require('../lib/storage.js');
 
+console.log('STORaGE',storage);
 //GET
 router.get('/songs', (request, response) => {
   if (request.query.id) {
@@ -24,7 +25,7 @@ router.get('/songs', (request, response) => {
 //POST
 router.post('/songs', (request, response) => {
   let song = {
-    title: request.body.title,
+    title: request.body.title,//http POST :3000 
     composer: request.body.composer,
     difficulty: request.body.difficulty
   };
@@ -38,9 +39,11 @@ router.post('/songs', (request, response) => {
 
 //PUT
 router.put('/songs', (request, response) => {
+  console.log('router.put hit');
   let id = request.query.id;
   storage.get(id)
     .then(song => {
+      console.log('route-46',song);
       if(request.body.title) {
         song.title = request.body.title;
       }
@@ -51,22 +54,30 @@ router.put('/songs', (request, response) => {
         song.difficulty = request.body.difficulty;
       }
 
-      song.save((error, book) => {
+      song.save((error, song) => {
         if(error) {
           throw(error);
         };
-        response.send(book);
+        response.send(song);
       });
     });
 });
 
 //DELETE
 router.delete('/songs', (request, response) => {
-  let id = request.query.id;
-  storage.remove(id)
-    .then(song => {
-      response.send(song);
-    });
+  if(request.query.id) {
+    let id = request.query.id;
+    storage.remove(id)
+      .then(song => {
+        response.send(`Song Removed ${song}`);
+      });
+  } else {
+    storage.removeAll()
+      .then(songs => {
+        response.send(`All songs removed ${songs}`);
+      });
+  };
 });
 
-module.exports = {router};
+module.exports = router;
+

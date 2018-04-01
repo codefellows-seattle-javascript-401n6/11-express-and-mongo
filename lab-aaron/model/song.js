@@ -10,4 +10,4 @@ let songSchema = new mongoose.Schema({
 
 let Song = mongoose.model('Song', songSchema);
 
-module.exports = {Song};
+module.exports = Song;
