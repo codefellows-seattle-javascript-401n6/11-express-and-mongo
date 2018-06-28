@@ -14,7 +14,7 @@ const printerRoutes = require('./routes/printer.js');
 app.use(bodyParser.json());
 
 app.use('/', rootRoutes);
-app.use('/printer', printerRoutes);
+app.use('/api/printers', printerRoutes);
 // app.use('/city', cityRoutes);
 
 let ft5_01 = new Printer({ name: 'FT5-01', style: 'FT5', volume: '300x300x400', nozel: 0.3, filament: 1.75});
@@ -24,7 +24,7 @@ let mhz_01 = new Printer({ name: 'MHZ-01', style: 'MHZ', volume: '200x200x180', 
 
 Printer.remove()
 .then(info => {
-  console.log("INFO:", info)
+  // console.log("INFO:", info)
   let saves = [
     ft5_01.save(),
     ft5_02.save(),
@@ -34,12 +34,12 @@ Printer.remove()
   return Promise.all(saves)
 })
 .then((savedPrinters) => {
-  console.log("SAVED:", savedPrinters);
+  // console.log("SAVED:", savedPrinters);
   return Printer.find();
 })
 .then((results) => {
-  console.log("FOUND:", results);
-  console.log("FOUND TOTAL:", results.length);
+  // console.log("FOUND:", results);
+  // console.log("FOUND TOTAL:", results.length);
   mongoose.disconnect();
 })
 
