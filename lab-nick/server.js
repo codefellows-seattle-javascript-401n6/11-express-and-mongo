@@ -40,7 +40,7 @@ Printer.remove()
 .then((results) => {
   // console.log("FOUND:", results);
   // console.log("FOUND TOTAL:", results.length);
-  mongoose.disconnect();
+  // mongoose.disconnect();
 })
 
 const PORT = process.env.PORT || 3000;
