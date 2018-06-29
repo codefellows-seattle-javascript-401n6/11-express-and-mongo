@@ -1,14 +1,12 @@
-import { Mongoose } from 'mongoose';
-
 'use strict'; // because michael appreciates the little things
 
-const congoose = require ('mongoose');
+const mongoose = require('mongoose');
 
-const robotSchema = new Mongoose.schema({
+const robotSchema = new mongoose.Schema({
   name: String,
   purpose: String,
   yearBuilt: String
 });
 
 const Robot = mongoose.model('Robot', robotSchema);
-module.export = Robot;
+module.exports = Robot;
